@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BusTrack | Home</title>
+<style>
+  :root {
+    --primary: #328aef;
+    --accent: #1976d2;
+    --light: #f7fafd;
+    --text: #222;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--light);
+    color: var(--text);
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary);
+    color: white;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  nav .logo {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  nav ul li a:hover {
+    color: var(--accent);
+  }
+  .login-btn {
+    background: white;
+    color: var(--primary);
+    padding: 8px 22px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+  }
+  .login-btn:hover {
+    background: var(--accent);
+    color: white;
+  }
+  .hero {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+      url("https://tse3.mm.bing.net/th/id/OIP.RnImilMsI1DmvyTvswjerwHaDt?pid=Api&P=0&h=180") center/cover no-repeat;
+    height: 85vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .hero h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    animation: slideDown 1.2s ease;
+  }
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    animation: fadeIn 1.5s ease;
+  }
+  .hero button {
+    background: white;
+    color: var(--primary);
+    padding: 14px 35px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .hero button:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.05);
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+  .feature {
+    background: var(--light);
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 280px;
+    text-align: center;
+    transition: 0.3s;
+  }
+  .feature:hover {
+    transform: translateY(-10px);
+  }
+  .feature h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .feature p {
+    color: #555;
+    font-size: 15px;
+  }
+  footer {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">BusTrack</div>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="admin.html">Admin</a></li>
+      <li><a href="driver.html">Driver</a></li>
+      <li><a href="student.html">Student</a></li>
+      <li>
+        <a href="login.html" class="login-btn">Login</a>
+      </li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <h1>Manage College Buses Efficiently</h1>
+    <p>Track buses, routes, drivers, and students in one dashboard.</p>
+    <button onclick="window.location.href='login.html'">Get Started </button>
+  </section>
+  <section class="features">
+    <div class="feature">
+      <h3> Real-time Tracking</h3>
+      <p>Monitor bus locations live and ensure timely arrivals for students.</p>
+    </div>
+    <div class="feature">
+      <h3> Route Management</h3>
+      <p>Easily assign and manage routes for all buses in your fleet.</p>
+    </div>
+    <div class="feature">
+      <h3>Driver & Student Management</h3>
+      <p>Keep track of drivers and student allocations efficiently.</p>
+    </div>
+  </section>
+  <footer>
+    © 2025 BusTrack | Made with love for students and colleges
+  </footer>
+</body>
+</html>
