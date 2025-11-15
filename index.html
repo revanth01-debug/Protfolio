@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethical Web Development Checklist</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <header role="banner">
+    <h1 class="main-title" id="main-title">Ethical Web Development Checklist</h1>
+    <p class="subtitle" id="subtitle">Your comprehensive guide to building responsible, accessible, and user-centered websites</p>
+    <p class="intro-text" id="intro-text">Ensure your web projects meet the highest standards of ethics, privacy, accessibility, and sustainability with this interactive checklist covering all aspects of responsible development.</p>
+   </header>
+   <main role="main">
+    <section class="progress-section" aria-labelledby="progress-title">
+     <div class="progress-header">
+      <h2 class="progress-title" id="progress-title">Your Progress</h2>
+     </div>
+     <div class="progress-stats">
+      <div class="stat-card">
+       <div class="stat-number" id="completed-count">
+        0
+       </div>
+       <div class="stat-label">
+        Items Completed
+       </div>
+      </div>
+      <div class="stat-card">
+       <div class="stat-number" id="total-count">
+        0
+       </div>
+       <div class="stat-label">
+        Total Items
+       </div>
+      </div>
+      <div class="stat-card">
+       <div class="stat-number" id="completion-percentage">
+        0%
+       </div>
+       <div class="stat-label">
+        Completion Rate
+       </div>
+      </div>
+     </div>
+     <div class="progress-bar-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="progress-title">
+      <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+     </div>
+     <div class="progress-text" id="progress-text">
+      Get started by checking off completed items!
+     </div>
+    </section>
+    <div class="checklist-grid"><!-- UX/UI Ethics Section -->
+     <section class="checklist-section" aria-labelledby="ux-title">
+      <div class="section-header"><span class="section-icon" aria-hidden="true">🎨</span>
+       <h3 class="section-title" id="ux-title">UX/UI Ethics</h3>
+      </div>
+      <ul class="checklist-items" role="list">
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="ux-1" aria-describedby="ux-1-desc"> <label for="ux-1" id="ux-1-desc">No dark patterns (confirmshaming, hidden costs, trick questions)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="ux-2" aria-describedby="ux-2-desc"> <label for="ux-2" id="ux-2-desc">Clear navigation with easy exit paths from all flows</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="ux-3" aria-describedby="ux-3-desc"> <label for="ux-3" id="ux-3-desc">Honest visual hierarchy (important info is prominent)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="ux-4" aria-describedby="ux-4-desc"> <label for="ux-4" id="ux-4-desc">Minimal interruptions (dismissible popups/modals)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="ux-5" aria-describedby="ux-5-desc"> <label for="ux-5" id="ux-5-desc">Inclusive language and diverse representation</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="ux-6" aria-describedby="ux-6-desc"> <label for="ux-6" id="ux-6-desc">No artificial urgency or false scarcity tactics</label></li>
+      </ul>
+     </section><!-- Privacy & Data Protection Section -->
+     <section class="checklist-section" aria-labelledby="privacy-title">
+      <div class="section-header"><span class="section-icon" aria-hidden="true">🔒</span>
+       <h3 class="section-title" id="privacy-title">Privacy &amp; Data Protection</h3>
+      </div>
+      <ul class="checklist-items" role="list">
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="privacy-1" aria-describedby="privacy-1-desc"> <label for="privacy-1" id="privacy-1-desc">Collect only necessary data (privacy by design)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="privacy-2" aria-describedby="privacy-2-desc"> <label for="privacy-2" id="privacy-2-desc">Explicit opt-in consent (no pre-checked boxes)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="privacy-3" aria-describedby="privacy-3-desc"> <label for="privacy-3" id="privacy-3-desc">Granular cookie controls with category toggles</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="privacy-4" aria-describedby="privacy-4-desc"> <label for="privacy-4" id="privacy-4-desc">"Reject All" option works without penalty</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="privacy-5" aria-describedby="privacy-5-desc"> <label for="privacy-5" id="privacy-5-desc">Clear data usage explanation in plain language</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="privacy-6" aria-describedby="privacy-6-desc"> <label for="privacy-6" id="privacy-6-desc">Easy data access, download, and deletion</label></li>
+      </ul>
+     </section><!-- Security Section -->
+     <section class="checklist-section" aria-labelledby="security-title">
+      <div class="section-header"><span class="section-icon" aria-hidden="true">🛡</span>
+       <h3 class="section-title" id="security-title">Security</h3>
+      </div>
+      <ul class="checklist-items" role="list">
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="security-1" aria-describedby="security-1-desc"> <label for="security-1" id="security-1-desc">HTTPS enforced across entire site (HSTS enabled)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="security-2" aria-describedby="security-2-desc"> <label for="security-2" id="security-2-desc">Strong authentication (password requirements, MFA)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="security-3" aria-describedby="security-3-desc"> <label for="security-3" id="security-3-desc">All user inputs validated and sanitized</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="security-4" aria-describedby="security-4-desc"> <label for="security-4" id="security-4-desc">Content Security Policy (CSP) headers implemented</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="security-5" aria-describedby="security-5-desc"> <label for="security-5" id="security-5-desc">Dependencies updated (no known CVEs)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="security-6" aria-describedby="security-6-desc"> <label for="security-6" id="security-6-desc">Rate limiting on forms and APIs</label></li>
+      </ul>
+     </section><!-- Accessibility Section -->
+     <section class="checklist-section" aria-labelledby="accessibility-title">
+      <div class="section-header"><span class="section-icon" aria-hidden="true">♿</span>
+       <h3 class="section-title" id="accessibility-title">Accessibility</h3>
+      </div>
+      <ul class="checklist-items" role="list">
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="a11y-1" aria-describedby="a11y-1-desc"> <label for="a11y-1" id="a11y-1-desc">WCAG 2.2 Level AA compliance verified</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="a11y-2" aria-describedby="a11y-2-desc"> <label for="a11y-2" id="a11y-2-desc">Semantic HTML (proper headings, landmarks)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="a11y-3" aria-describedby="a11y-3-desc"> <label for="a11y-3" id="a11y-3-desc">Full keyboard navigation with visible focus</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="a11y-4" aria-describedby="a11y-4-desc"> <label for="a11y-4" id="a11y-4-desc">Color contrast meets 4.5:1 ratio (3:1 for large text)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="a11y-5" aria-describedby="a11y-5-desc"> <label for="a11y-5" id="a11y-5-desc">Alt text for informative images</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="a11y-6" aria-describedby="a11y-6-desc"> <label for="a11y-6" id="a11y-6-desc">Captions for videos, transcripts for audio</label></li>
+      </ul>
+     </section><!-- Content Ethics Section -->
+     <section class="checklist-section" aria-labelledby="content-title">
+      <div class="section-header"><span class="section-icon" aria-hidden="true">📝</span>
+       <h3 class="section-title" id="content-title">Content Ethics</h3>
+      </div>
+      <ul class="checklist-items" role="list">
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="content-1" aria-describedby="content-1-desc"> <label for="content-1" id="content-1-desc">Information is accurate and fact-checked</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="content-2" aria-describedby="content-2-desc"> <label for="content-2" id="content-2-desc">Balanced representation (no stereotypes)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="content-3" aria-describedby="content-3-desc"> <label for="content-3" id="content-3-desc">Content warnings for distressing material</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="content-4" aria-describedby="content-4-desc"> <label for="content-4" id="content-4-desc">No addictive design patterns</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="content-5" aria-describedby="content-5-desc"> <label for="content-5" id="content-5-desc">Ads clearly distinguished from content</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="content-6" aria-describedby="content-6-desc"> <label for="content-6" id="content-6-desc">Age-appropriate content for target audience</label></li>
+      </ul>
+     </section><!-- Sustainability Section -->
+     <section class="checklist-section" aria-labelledby="sustainability-title">
+      <div class="section-header"><span class="section-icon" aria-hidden="true">🌱</span>
+       <h3 class="section-title" id="sustainability-title">Sustainability</h3>
+      </div>
+      <ul class="checklist-items" role="list">
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="sustain-1" aria-describedby="sustain-1-desc"> <label for="sustain-1" id="sustain-1-desc">Green hosting provider (renewable energy)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="sustain-2" aria-describedby="sustain-2-desc"> <label for="sustain-2" id="sustain-2-desc">Images and media optimized (WebP/AVIF, lazy-loading)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="sustain-3" aria-describedby="sustain-3-desc"> <label for="sustain-3" id="sustain-3-desc">Minimal dependencies (unused code removed)</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="sustain-4" aria-describedby="sustain-4-desc"> <label for="sustain-4" id="sustain-4-desc">Dark mode option available</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="sustain-5" aria-describedby="sustain-5-desc"> <label for="sustain-5" id="sustain-5-desc">CDN and caching strategy implemented</label></li>
+       <li class="checklist-item" role="listitem"><input type="checkbox" id="sustain-6" aria-describedby="sustain-6-desc"> <label for="sustain-6" id="sustain-6-desc">Performance budget enforced (&lt;1MB initial load)</label></li>
+      </ul>
+     </section>
+    </div>
+    <section class="actions-section" aria-label="Actions"><button class="action-button primary-button" onclick="resetProgress()" aria-describedby="reset-desc"> <span aria-hidden="true">🔄</span> Reset Progress </button> <button class="action-button secondary-button" onclick="exportProgress()" aria-describedby="export-desc"> <span aria-hidden="true">📋</span> Export Checklist </button> <button class="action-button secondary-button" onclick="printChecklist()" aria-describedby="print-desc"> <span aria-hidden="true">🖨</span> Print Checklist </button>
+    </section>
+    <div style="display: none;"><span id="reset-desc">Reset all checkboxes to start over</span> <span id="export-desc">Export your progress as a text file</span> <span id="print-desc">Print the checklist for offline use</span>
+    </div>
+   </main>
+   <footer role="contentinfo">
+    <p class="footer-text" id="footer-text">Build ethical websites that respect users, protect privacy, and create inclusive experiences for everyone. Your code shapes the digital world.</p>
+   </footer>
+  </div>
+  <script src="script.js"></script>
+  </body>
+</html>
