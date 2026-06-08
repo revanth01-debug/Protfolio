@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart | Customer</title>
+<style>
+/* General Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #fefcea, #f1da36);
+  color: #333;
+}
+
+/* Navbar Styling */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff6f61;
+  padding: 10px 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px #00000050;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav ul li a.active, nav ul li a:hover {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+/* Container Styling */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.container h2 {
+  font-size: 2em;
+  color: #ff6f61;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Cart item styling */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-details span {
+  display: block;
+  font-weight: 500;
+}
+
+.cart-item button {
+  background: #ff6f61;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-item button:hover {
+  background: #ff3b2e;
+}
+
+#checkoutBtn {
+  display: block;
+  margin: 20px auto 0;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#checkoutBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* Empty cart styling */
+.empty-cart {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin: 20px 0;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🍕 FoodieHub</div>
+  <ul>
+    <li><a href="home_customer.html">Home</a></li>
+    <li><a href="menu_customer.html">Menu</a></li>
+    <li><a href="cart_customer.html" class="active">Cart</a></li>
+    <li><a href="orders_customer.html">Orders</a></li>
+    <li id="navbar"></li>
+    <li><a href="#" onclick="logoutUser()">Logout</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <button id="checkoutBtn" onclick="checkout()">Place Order</button>
+</div>
+
+<script>
+// Load user info in navbar
+function loadNavbar() {
+    const navbar = document.getElementById('navbar');
+    let userEmail = localStorage.getItem('userEmail') || 'Customer';
+    navbar.innerHTML = `<span style="color: #fff; font-weight:bold;">Hello, ${userEmail.split('@')[0]}!</span>`;
+}
+
+// Logout
+function logoutUser() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+// Load cart items with images
+function loadCart(){
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const div = document.getElementById("cartItems");
+    if(cart.length === 0){
+        div.innerHTML = "<p class='empty-cart'>Your cart is empty </p>";
+        document.getElementById('checkoutBtn').style.display = 'none';
+        return;
+    }
+    div.innerHTML = "";
+    cart.forEach((item, index) => {
+        div.innerHTML += `
+        <div class="cart-item">
+            <img src="${item.image || 'https://via.placeholder.com/80x60.png?text=Food'}" alt="${item.name}">
+            <div class="cart-item-details">
+                <span>${item.name}</span>
+                <span>₹${item.price} x ${item.quantity}</span>
+            </div>
+            <button onclick="removeItem(${index})">Remove</button>
+        </div>`;
+    });
+}
+
+// Remove single item from cart
+function removeItem(index){
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Checkout
+function checkout(){
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if(cart.length === 0){ alert("Cart is empty!"); return; }
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    const total = cart.reduce((a,b)=>a + (b.price * b.quantity), 0);
+    orders.push({id: Date.now(), items: cart, status:"pending", total_amount: total});
+    localStorage.setItem("orders", JSON.stringify(orders));
+    localStorage.removeItem("cart");
+    alert(`Order placed successfully! Total: ₹${total}`);
+    window.location.href="orders_customer.html";
+}
+
+loadNavbar();
+loadCart();
+</script>
+
+</body>
+</html>

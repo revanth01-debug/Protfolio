@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu | Restaurant</title>
+<style>
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #fefcea, #f1da36);
+  color: #333;
+}
+
+/* Navbar Styling */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff6f61;
+  padding: 10px 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px #00000050;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav ul li a, nav ul li span, nav ul li button {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav ul li a.active {
+  color: #ffd700;
+}
+
+/* Container Styling */
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Heading */
+.container h2 {
+  font-size: 2em;
+  color: #ff6f61;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Menu Items Cards */
+.menu-card {
+  background-color: #fff3e0;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-card p {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.menu-card button {
+  margin-left: 10px;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #ff6f61;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.menu-card button:hover {
+  background-color: #ff3b2e;
+}
+
+#addItemBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #ff6f61;
+  color: #fff;
+  transition: 0.3s;
+}
+
+#addItemBtn:hover {
+  background-color: #ff3b2e;
+}
+
+/* Responsive */
+@media(max-width: 768px){
+  .menu-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .menu-card button {
+    margin-top: 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🍕 FoodieHub</div>
+  <ul>
+    <li><a href="home_restaurant.html">Home</a></li>
+    <li><a href="menu_restaurant.html" class="active">Menu</a></li>
+    <li><a href="orders_restaurant.html">Orders</a></li>
+    <li id="navbar"></li>
+    <li><a href="#" onclick="logoutUser()">Logout</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>Manage Menu</h2>
+  <div id="menuItems"></div>
+  <button id="addItemBtn" onclick="addMenuItem()">Add New Item</button>
+</div>
+
+<script>
+// Navbar load function (optional)
+function loadNavbar(){
+    const navbar = document.getElementById('navbar');
+    const userName = localStorage.getItem("userName") || "Restaurant";
+    navbar.innerHTML = `<span style="color:#fff; font-weight:bold;">Hello, ${userName}!</span>`;
+}
+
+// Logout function
+function logoutUser(){
+    localStorage.clear();
+    window.location.href="login.html";
+}
+
+// Sample menu items
+let menuItemsData = [
+    {id:1,name:"Pizza",price:250},
+    {id:2,name:"Burger",price:150},
+    {id:3,name:"Pasta",price:200},
+    {id:4,name:"Biryani",price:250},
+    {id:5,name:"Tandoori",price:300},
+    {id:6,name:"Cake",price:500},
+    {id:7,name:"Ice Cream",price:100}
+];
+
+function loadMenu(){
+    const div = document.getElementById("menuItems");
+    div.innerHTML = "";
+    menuItemsData.forEach(item=>{
+        const card = document.createElement("div");
+        card.className = "menu-card";
+        card.innerHTML = `
+            <p>${item.name} - ₹${item.price}</p>
+            <div>
+              <button onclick="editItem(${item.id})">Edit</button>
+              <button onclick="deleteItem(${item.id})">Delete</button>
+            </div>
+        `;
+        div.appendChild(card);
+    });
+}
+
+function addMenuItem(){
+    const name = prompt("Enter item name:");
+    const price = prompt("Enter item price:");
+    if(name && price){
+        const newId = menuItemsData.length ? menuItemsData[menuItemsData.length-1].id + 1 : 1;
+        menuItemsData.push({id:newId,name:name,price:Number(price)});
+        loadMenu();
+    }
+}
+
+function editItem(id){
+    const item = menuItemsData.find(i=>i.id===id);
+    if(item){
+        const newName = prompt("Edit item name:", item.name);
+        const newPrice = prompt("Edit item price:", item.price);
+        if(newName && newPrice){
+            item.name = newName;
+            item.price = Number(newPrice);
+            loadMenu();
+        }
+    }
+}
+
+function deleteItem(id){
+    menuItemsData = menuItemsData.filter(i=>i.id!==id);
+    loadMenu();
+}
+
+// Initial load
+loadNavbar();
+loadMenu();
+</script>
+
+</body>
+</html>
