@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup | FoodieHub</title>
+<style>
+/* Body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fefcea, #f1da36);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container styling */
+.container {
+    background: rgba(255,255,255,0.95);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Heading */
+.container h2 {
+    color: #ff6f61;
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+/* Inputs and select */
+.container input, .container select {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+.container input:focus, .container select:focus {
+    outline: none;
+    border-color: #ff6f61;
+    box-shadow: 0 0 5px rgba(255,111,97,0.5);
+}
+
+/* Button styling */
+.container button {
+    width: 100%;
+    background-color: #ff6f61;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.container button:hover {
+    background-color: #ff3b2e;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Login link */
+.container p {
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.container p a {
+    color: #ff6f61;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.container p a:hover {
+    color: #ff3b2e;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media(max-width: 500px) {
+    .container {
+        padding: 30px 20px;
+    }
+    .container h2 {
+        font-size: 1.7em;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="customer">Customer</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="delivery">Delivery</option>
+        </select>
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+</div>
+
+<script src="script.js"></script>
+<script>
+document.getElementById("signupForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const role = document.getElementById("role").value;
+    
+    // Call loginUser for now (simulate signup) 
+    loginUser(email, role);
+
+    // Redirect to login page after signup
+    alert("Signup successful! Redirecting to login page.");
+    window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

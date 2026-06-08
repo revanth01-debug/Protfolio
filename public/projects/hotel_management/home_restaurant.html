@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Home | FoodieHub</title>
+<style>
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #fefcea, #f1da36);
+  color: #333;
+}
+
+/* Navbar Styling */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff6f61;
+  padding: 10px 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px #00000050;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav ul li a, nav ul li span, nav ul li button {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav ul li button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ff3b2e;
+  transition: 0.3s;
+}
+
+nav ul li button:hover {
+  background-color: #ff1a00;
+}
+
+/* Container Styling */
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Heading */
+.container h2 {
+  font-size: 2em;
+  color: #ff6f61;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Info Section */
+.info-section {
+  background-color: #fff8e1;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  font-size: 1.1em;
+  line-height: 1.5em;
+  color: #555;
+}
+.info-section strong {
+  color: #ff6f61;
+}
+
+/* Order Card Styling */
+.order-card {
+  background-color: #fff3e0;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.order-card p {
+  margin: 5px 0;
+}
+
+.order-card .status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-top: 5px;
+}
+.status.pending { background: #f39c12; }
+.status.accepted { background: #3498db; }
+.status.preparing { background: #9b59b6; }
+.status.on_the_way { background: #27ae60; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🍕 FoodieHub</div>
+  <ul>
+    <li><a href="home_restaurant.html" class="active">Home</a></li>
+    <li><a href="menu_restaurant.html">Menu</a></li>
+    <li><a href="profile_restaurant.html">Profile</a></li>
+    <li id="loginArea"></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>Welcome, <span id="restaurantName"></span></h2>
+
+  <div class="info-section">
+    <p>Hello <strong id="restaurantNameParagraph"></strong>! Keep track of your current orders below.</p>
+    <p>Tip: Update the order status as soon as preparation starts, so customers stay informed.</p>
+  </div>
+
+  <div id="ordersContainer">
+    <!-- Orders will appear here as cards -->
+  </div>
+</div>
+
+<script>
+// Navbar greeting with Logout
+function loadNavbar() {
+    const navbar = document.getElementById('loginArea');
+    const userName = localStorage.getItem("userName") || "Restaurant";
+    navbar.innerHTML = `
+        <span>Hello, ${userName}!</span>
+        <button onclick="logout()">Logout</button>
+    `;
+}
+
+function logout(){
+    localStorage.clear();
+    window.location.href="login.html";
+}
+
+// Check login and set restaurantId
+const userRole = localStorage.getItem("userRole");
+const restaurantId = Number(localStorage.getItem("userId") || 1);
+const restaurantName = localStorage.getItem("userName") || "Restaurant";
+
+if(!userRole || userRole !== "restaurant"){
+  window.location.href = "login.html";
+}
+
+document.getElementById("restaurantName").textContent = restaurantName;
+document.getElementById("restaurantNameParagraph").textContent = restaurantName;
+
+// Sample orders
+if(!localStorage.getItem("orders")){
+    localStorage.setItem("orders", JSON.stringify([
+        { restaurant_id: 1, customer_name: "Alice", total_amount: 370, status: "pending",
+          items: [
+            {name:"Pizza", quantity:1},
+            {name:"Burger", quantity:1}
+          ]
+        },
+        { restaurant_id: 1, customer_name: "Bob", total_amount: 200, status: "accepted",
+          items: [
+            {name:"Pasta", quantity:1}
+          ]
+        }
+    ]));
+}
+
+function loadOrders(){
+    const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    const filteredOrders = allOrders.filter(o => o.restaurant_id === restaurantId);
+    const container = document.getElementById("ordersContainer");
+    container.innerHTML = "";
+
+    filteredOrders.forEach(order=>{
+        const div = document.createElement("div");
+        div.className = "order-card";
+        div.innerHTML = `
+            <p><strong>Customer:</strong> ${order.customer_name}</p>
+            <p><strong>Items:</strong> ${order.items.map(i=>i.name+" x"+i.quantity).join(", ")}</p>
+            <p><strong>Total:</strong> ₹${order.total_amount}</p>
+            <span class="status ${order.status}">${order.status}</span>
+        `;
+        container.appendChild(div);
+    });
+}
+
+loadNavbar();
+loadOrders();
+</script>
+
+</body>
+</html>

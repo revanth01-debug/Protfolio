@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Attendance Demo</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #020617 0%, #0b1120 100%);
+        color: #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .demo-shell {
+        width: min(1200px, 100%);
+        border-radius: 32px;
+        background: rgba(15, 23, 42, 0.94);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+        overflow: hidden;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 2rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(56, 189, 248, 0.12);
+        color: #38bdf8;
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      header h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 3vw, 3rem);
+      }
+      .hero-text {
+        max-width: 720px;
+      }
+      .hero-text p {
+        margin: 1rem 0 0;
+        line-height: 1.8;
+        color: #cbd5e1;
+        font-size: 1rem;
+      }
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 0.9fr;
+        gap: 2rem;
+        padding: 2rem;
+      }
+      .note-box {
+        margin-top: 1rem;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.16);
+        color: #c7d2fe;
+        padding: 1.25rem 1.5rem;
+        border-radius: 24px;
+      }
+      .camera-card,
+      .info-card {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 32px;
+        padding: 1.5rem;
+      }
+      .camera-card {
+        min-height: 460px;
+        display: grid;
+        grid-template-rows: 1fr auto;
+      }
+      .camera-preview {
+        position: relative;
+        border-radius: 28px;
+        background: radial-gradient(circle at top, rgba(56, 189, 248, 0.14), transparent 40%),
+          linear-gradient(180deg, #111827 0%, #0f172a 100%);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        overflow: hidden;
+        box-shadow: inset 0 0 40px rgba(56, 189, 248, 0.12);
+      }
+      .camera-preview::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.08), transparent 35%),
+          linear-gradient(90deg, rgba(255,255,255,0.03), transparent 40%, rgba(255,255,255,0.03));
+        opacity: 0.5;
+      }
+      .camera-frame {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #cbd5e1;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .camera-pulse {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        font-size: 0.95rem;
+      }
+      .camera-dot {
+        width: 0.85rem;
+        height: 0.85rem;
+        background: #ef4444;
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+        animation: pulse 1.4s infinite ease-in-out;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.3); opacity: 0.6; }
+      }
+      .camera-status {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        color: #94a3b8;
+        font-size: 0.95rem;
+      }
+      .status-active {
+        color: #34d399;
+      }
+      .control-row {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+      .control-row label {
+        color: #cbd5e1;
+        font-weight: 600;
+      }
+      .control-row input {
+        width: 100%;
+        padding: 0.95rem 1rem;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: rgba(15, 23, 42, 0.95);
+        color: #e2e8f0;
+        font-size: 1rem;
+      }
+      .info-card h2 {
+        margin-top: 0;
+        color: #38bdf8;
+      }
+      .info-card ul {
+        padding-left: 1.4rem;
+        color: #cbd5e1;
+      }
+      .info-card li {
+        margin-bottom: 0.85rem;
+      }
+      .attendance-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.25rem;
+      }
+      .attendance-table th,
+      .attendance-table td {
+        padding: 0.95rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      }
+      .attendance-table th {
+        color: #94a3b8;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+      }
+      .attendance-table tbody tr:hover {
+        background: rgba(56, 189, 248, 0.06);
+      }
+      .action-bar {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.95rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+      }
+      .button-primary {
+        background: #38bdf8;
+        color: #020617;
+      }
+      .button-secondary {
+        background: rgba(255,255,255,0.06);
+        color: #dbeafe;
+        border-color: rgba(148, 163, 184, 0.18);
+      }
+      .footer {
+        padding: 2rem;
+        border-top: 1px solid rgba(148, 163, 184, 0.12);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        color: #94a3b8;
+      }
+      @media (max-width: 900px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="demo-shell">
+      <header>
+        <div class="hero-text">
+          <div class="badge">Face Attendance Demo</div>
+          <h1>Face Attendance System</h1>
+          <p>Preview how the Python-based facial recognition attendance system works. This demo page shows the live monitoring interface and attendance logging experience.</p>
+        </div>
+        <a class="button button-secondary" href="../../../index.html">Back to Portfolio</a>
+      </header>
+
+      <section class="main-grid">
+        <div class="camera-card">
+          <div class="camera-preview">
+            <div class="camera-frame">
+              Camera preview
+              <div class="camera-pulse">
+                <span class="camera-dot"></span>
+                Live recognition active
+              </div>
+            </div>
+          </div>
+
+          <div class="camera-status">
+            <span class="status-active">Camera: connected</span>
+            <span>Model: LBPHFaceRecognizer</span>
+          </div>
+
+          <div class="control-row">
+            <label for="studentName">Enter your name</label>
+            <input id="studentName" type="text" placeholder="Type name and press capture" autocomplete="off" />
+          </div>
+
+          <button class="button button-primary" id="captureButton">Capture photo & log attendance</button>
+
+          <div class="note-box" id="messageBox">Enter a name and click capture to log attendance.</div>
+        </div>
+
+        <div class="info-card">
+          <h2>Live Attendance Log</h2>
+          <p>Simulated attendance entries appear here as faces are recognized and logged during the session.</p>
+
+          <table class="attendance-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceRows">
+              <tr>
+                <td>Revanth</td>
+                <td>09:14 AM</td>
+                <td class="status">Present</td>
+              </tr>
+              <tr>
+                <td>Ajay</td>
+                <td>09:18 AM</td>
+                <td class="status">Present</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note-box">
+            <strong>Note:</strong> This page is a browser preview of the desktop Python attendance system. Enter a name and click capture to simulate attendance logging.
+          </div>
+        </div>
+      </section>
+
+      <section class="action-bar">
+        <div>
+          <h2>How to run the real demo</h2>
+          <p>Open the folder <code>public/projects/face_attendance</code>, install dependencies, and run the main Python script below.</p>
+        </div>
+        <div class="action-buttons">
+          <a class="button button-primary" href="requirements.txt">Open requirements</a>
+          <a class="button button-secondary" href="../../../index.html">Back to Portfolio</a>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>Local project folder: <code>public/projects/face_attendance</code></span>
+        <span>Run <code>python attendance_system_classroom.py</code> for the live recognition demo.</span>
+      </footer>
+    </article>
+
+    <script>
+      const captureButton = document.getElementById('captureButton');
+      const studentNameInput = document.getElementById('studentName');
+      const messageBox = document.getElementById('messageBox');
+      const attendanceRows = document.getElementById('attendanceRows');
+
+      function formatTime(date) {
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      function addAttendanceRow(name) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${name}</td>
+          <td>${formatTime(new Date())}</td>
+          <td class="status">Present</td>
+        `;
+        attendanceRows.appendChild(row);
+      }
+
+      captureButton.addEventListener('click', () => {
+        const name = studentNameInput.value.trim();
+
+        if (!name) {
+          messageBox.textContent = 'Please enter a name before capturing the photo.';
+          messageBox.style.background = 'rgba(248, 113, 113, 0.12)';
+          messageBox.style.borderColor = 'rgba(248, 113, 113, 0.3)';
+          return;
+        }
+
+        addAttendanceRow(name);
+        studentNameInput.value = '';
+        studentNameInput.focus();
+        messageBox.textContent = `Captured photo for ${name} and logged attendance successfully.`;
+        messageBox.style.background = 'rgba(52, 211, 153, 0.12)';
+        messageBox.style.borderColor = 'rgba(52, 211, 153, 0.3)';
+      });
+
+      studentNameInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          captureButton.click();
+        }
+      });
+    </script>
+  </body>
+</html>
