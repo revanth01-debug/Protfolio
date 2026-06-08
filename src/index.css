@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+html{
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body{
+  min-height: 100vh;
+  scroll-snap-type: y mandatory;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: #050816;
+  color: white;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track{
+  background: #050816;
+}
+
+::-webkit-scrollbar-thumb{
+  background: cyan;
+  border-radius: 20px;
+}
+
+/* IMAGE GLOW */
+
+img:hover{
+  filter: drop-shadow(0 0 25px cyan);
+}
+
+/* BUTTON EFFECT */
+
+button{
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:hover{
+  transform: scale(1.05);
+}
+
+/* NAVBAR LINK EFFECT */
+
+li{
+  transition: 0.4s;
+}
+
+li:hover{
+  color: cyan;
+  transform: translateY(-2px);
+}
+
+/* INPUTS */
+
+input,
+textarea{
+  color: white;
+}
+
+/* SELECTION COLOR */
+
+::selection{
+  background: cyan;
+  color: black;
+}
+
+.glow-on-click {
+  cursor: pointer;
+  transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.glow-on-click:hover {
+  color: #67e8f9;
+}
+
+.glow-on-click:active {
+  color: #22d3ee;
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.95), 0 0 30px rgba(56, 189, 248, 0.4);
+  transform: scale(1.02);
+}
+
+.nav-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #22d3ee;
+}
+
+.nav-link:active {
+  text-shadow: 0 0 16px rgba(34, 211, 238, 0.75);
+}
+
+.icon-glow {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.icon-glow:active {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.45);
+}
+
+/* FLOAT ANIMATION */
+
+@keyframes floating{
+  0%{
+    transform: translateY(0px);
+  }
+
+  50%{
+    transform: translateY(-15px);
+  }
+
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+.animate-floating{
+  animation: floating 3s ease-in-out infinite;
+}

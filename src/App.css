@@ -1,0 +1,254 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
+import profile from "./assets/profile.png";
+
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { TypeAnimation } from "react-type-animation";
+
+function App() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1200,
+    });
+  }, []);
+
+  return (
+
+    <div className="min-h-screen bg-[#050816] text-white overflow-x-hidden">
+
+      {/* NAVBAR */}
+
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-10 py-6 bg-[#050816]/80 backdrop-blur-md">
+
+        <h1 className="text-3xl font-bold text-cyan-400">
+          Revanth
+        </h1>
+
+        <ul className="flex gap-10 text-lg">
+
+          <a href="#home">
+            <li className="hover:text-cyan-400 duration-300 cursor-pointer">
+              Home
+            </li>
+          </a>
+
+          <a href="#about">
+            <li className="hover:text-cyan-400 duration-300 cursor-pointer">
+              About
+            </li>
+          </a>
+
+          <a href="#projects">
+            <li className="hover:text-cyan-400 duration-300 cursor-pointer">
+              Projects
+            </li>
+          </a>
+
+          <a href="#contact">
+            <li className="hover:text-cyan-400 duration-300 cursor-pointer">
+              Contact
+            </li>
+          </a>
+
+        </ul>
+
+      </nav>
+
+      {/* HERO SECTION */}
+
+      <section
+        id="home"
+        className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-20 px-10"
+      >
+
+        {/* IMAGE + SOCIALS */}
+
+        <div className="flex flex-col items-center">
+
+          <div className="relative">
+
+            <div className="absolute inset-0 bg-cyan-500 blur-[100px] opacity-30 rounded-full"></div>
+
+            <img
+              src={profile}
+              alt="profile"
+              className="w-[320px] h-[320px] rounded-full border-4 border-cyan-400 object-cover relative z-10 hover:scale-110 duration-500 hover:shadow-[0_0_60px_cyan]"
+            />
+
+          </div>
+
+          {/* SOCIAL ICONS */}
+
+          <div className="flex justify-center gap-10 mt-8">
+
+            <a
+              href="https://github.com/revanth01-debug"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-16 h-16 rounded-full border-2 border-cyan-400 flex items-center justify-center text-3xl hover:bg-cyan-400 hover:text-black hover:scale-110 hover:shadow-[0_0_30px_cyan] duration-300"
+            >
+              <FaGithub />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/radharapu-revanth/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-16 h-16 rounded-full border-2 border-cyan-400 flex items-center justify-center text-3xl hover:bg-cyan-400 hover:text-black hover:scale-110 hover:shadow-[0_0_30px_cyan] duration-300"
+            >
+              <FaLinkedin />
+            </a>
+
+          </div>
+
+        </div>
+
+        {/* TEXT */}
+
+        <div className="max-w-2xl">
+
+          <h2 className="text-5xl font-bold">
+            Hello It's Me
+          </h2>
+
+          <h1 className="text-8xl font-extrabold text-cyan-400 mt-5">
+            Revanth
+          </h1>
+
+          <div className="text-4xl text-purple-400 mt-5 font-bold">
+
+            <TypeAnimation
+              sequence={[
+                "Full Stack Developer",
+                2000,
+                "UI/UX Designer",
+                2000,
+                "Frontend Developer",
+                2000,
+              ]}
+              speed={50}
+              repeat={Infinity}
+            />
+
+          </div>
+
+          <p className="text-gray-300 text-lg leading-9 mt-8">
+            Passionate Full Stack Developer focused on creating
+            modern responsive websites with premium UI/UX,
+            smooth animations and interactive experiences.
+          </p>
+
+          {/* BUTTONS */}
+
+          <div className="flex gap-6 mt-10">
+
+            <button className="px-8 py-4 rounded-xl bg-cyan-500 font-bold hover:scale-110 hover:shadow-[0_0_30px_cyan] duration-300">
+              View Portfolio
+            </button>
+
+            <button className="px-8 py-4 rounded-xl border border-purple-500 font-bold hover:scale-110 hover:shadow-[0_0_30px_purple] duration-300">
+              Hire Me
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ABOUT */}
+
+      <section
+        id="about"
+        data-aos="zoom-in"
+        className="min-h-screen flex flex-col justify-center px-10 py-20"
+      >
+
+        <h1 className="text-6xl font-bold text-center text-cyan-400 mb-20">
+          About Me
+        </h1>
+
+        <div className="grid md:grid-cols-2 gap-20 items-center">
+
+          <div className="bg-[#111827] p-10 rounded-3xl border border-cyan-500 hover:shadow-[0_0_40px_cyan] duration-500">
+
+            <h2 className="text-4xl font-bold mb-6 text-cyan-400">
+              Who Am I?
+            </h2>
+
+            <p className="text-gray-300 leading-9 text-lg">
+
+              I am a passionate Full Stack Web Developer
+              and UI/UX enthusiast focused on building
+              modern interactive websites and responsive applications.
+
+              I enjoy creating smooth animations,
+              premium designs and user-friendly experiences
+              using modern technologies.
+
+            </p>
+
+          </div>
+
+          {/* SKILLS */}
+
+          <div className="space-y-8">
+
+            <div>
+              <div className="flex justify-between mb-2">
+                <span>HTML</span>
+                <span>95%</span>
+              </div>
+
+              <div className="w-full bg-gray-700 rounded-full h-4">
+                <div className="bg-cyan-400 h-4 rounded-full w-[95%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-2">
+                <span>CSS</span>
+                <span>90%</span>
+              </div>
+
+              <div className="w-full bg-gray-700 rounded-full h-4">
+                <div className="bg-purple-500 h-4 rounded-full w-[90%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-2">
+                <span>JavaScript</span>
+                <span>85%</span>
+              </div>
+
+              <div className="w-full bg-gray-700 rounded-full h-4">
+                <div className="bg-pink-500 h-4 rounded-full w-[85%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-2">
+                <span>React</span>
+                <span>80%</span>
+              </div>
+
+              <div className="w-full bg-gray-700 rounded-full h-4">
+                <div className="bg-green-400 h-4 rounded-full w-[80%]"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  );
+}
+
+export default App;
