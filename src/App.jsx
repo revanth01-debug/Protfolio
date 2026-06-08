@@ -22,16 +22,44 @@ function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formStatus, setFormStatus] = useState(null);
 
-  const handleFormChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const handleFormChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name || "Visitor"}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    window.location.href = `mailto:radharapurevanth10@gmail.com?subject=${subject}&body=${body}`;
-  };
+  try {
+    setFormStatus("sending");
+
+    const response = await fetch("http://localhost:5000/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setFormStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } else {
+      console.error(data.error);
+      setFormStatus("error");
+    }
+  } catch (error) {
+    console.error(error);
+    setFormStatus("error");
+  }
+};
 
   const projects = [
     {
