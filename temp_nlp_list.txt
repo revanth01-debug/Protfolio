@@ -1,0 +1,7 @@
+C:\Users\radha\OneDrive\Desktop\FUTURE_FS_01\portfolio\public\projects\nlp_project\app.py
+C:\Users\radha\OneDrive\Desktop\FUTURE_FS_01\portfolio\public\projects\nlp_project\chat_history.json
+C:\Users\radha\OneDrive\Desktop\FUTURE_FS_01\portfolio\public\projects\nlp_project\knowledge_base.json
+C:\Users\radha\OneDrive\Desktop\FUTURE_FS_01\portfolio\public\projects\nlp_project\Pasted code.py
+C:\Users\radha\OneDrive\Desktop\FUTURE_FS_01\portfolio\public\projects\nlp_project\visits.json
+C:\Users\radha\OneDrive\Desktop\FUTURE_FS_01\portfolio\public\projects\nlp_project\why_sr.png
+
